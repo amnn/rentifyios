@@ -6,22 +6,31 @@
 //  Copyright (c) 2013 Ashok Menon. All rights reserved.
 //
 
+// TODO: PropertyCell
+// TODO: Set PropertySearchViewController as dataSource of PropertyTableViewController's TableView in relevant NIB.
+// TODO: Property Detail View (with own PropertyTableViewController for whom it is the data source.
+// TODO: Google Maps API Integration
+
 #import "AppDelegate.h"
 
-#import "PropertyTableViewController.h"
+#import "PropertySearchViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window                 = [[UIWindow alloc]                      initWithFrame:     [[UIScreen mainScreen] bounds] ];
-    self.propertyViewController = [[PropertyTableViewController alloc] initWithNibName: @"PropertyTableViewController.xib"
-                                                                                bundle:              [NSBundle mainBundle] ];
+    self.window               = [[UIWindow alloc]                       initWithFrame:  [[UIScreen mainScreen] bounds] ];
+    self.searchViewController = [[PropertySearchViewController alloc] initWithNibName: @"PropertySearchViewController"
+                                                                               bundle:           [NSBundle mainBundle] ];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController: self.searchViewController ];
     
     // Override point for customization after application launch.
-    //[self.window addSubview:self.propertyViewController.view];
-    self.window.backgroundColor    =        [UIColor whiteColor];
-    //self.window.rootViewController = self.propertyViewController;
+    [[navController navigationBar] setHidden:               true ];
+    [self.window                  addSubview: navController.view ];
+    
+    self.window.backgroundColor    = [UIColor whiteColor];
+    self.window.rootViewController =        navController;
     
     [self.window makeKeyAndVisible];
     return YES;

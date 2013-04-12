@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "PropertyTableViewController.h"
+#import "PropertySearchViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) PropertyTableViewController *propertyViewController;
+@property (strong, nonatomic) PropertySearchViewController *searchViewController;
 
 @end
