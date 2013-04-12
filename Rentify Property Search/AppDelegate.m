@@ -8,13 +8,21 @@
 
 #import "AppDelegate.h"
 
+#import "PropertyTableViewController.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window                 = [[UIWindow alloc]                      initWithFrame:     [[UIScreen mainScreen] bounds] ];
+    self.propertyViewController = [[PropertyTableViewController alloc] initWithNibName: @"PropertyTableViewController.xib"
+                                                                                bundle:              [NSBundle mainBundle] ];
+    
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    //[self.window addSubview:self.propertyViewController.view];
+    self.window.backgroundColor    =        [UIColor whiteColor];
+    //self.window.rootViewController = self.propertyViewController;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
