@@ -11,11 +11,39 @@
 // TODO: Property Detail View (with own PropertyTableViewController for whom it is the data source.
 // TODO: Google Maps API Integration
 
+#import "QuartzCore/CoreAnimation.h"
+
 #import "AppDelegate.h"
 
+#import "PropertyDataSource.h"
 #import "PropertySearchViewController.h"
 
 @implementation AppDelegate
+
+- (void)globalLock {
+    if(  self.activityIndicator ) return;
+    
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    [self.activityIndicator                                                setFrame:self.window.frame];
+    [self.activityIndicator.layer setBackgroundColor:[[UIColor colorWithWhite:0.0 alpha:0.8] CGColor]];
+    
+    [self.window         addSubview:self.activityIndicator];
+    [self.window              setUserInteractionEnabled:NO];
+    [self.activityIndicator setCenter:[self.window center]];
+    [self.activityIndicator                 startAnimating];
+    
+}
+
+- (void)globalUnlock {
+    if( !self.activityIndicator ) return;
+    
+    [self.activityIndicator       stopAnimating];
+    [self.activityIndicator removeFromSuperview];
+    [self.window  setUserInteractionEnabled:YES];
+    
+    self.activityIndicator = nil;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -24,6 +52,7 @@
                                                                                bundle:           [NSBundle mainBundle] ];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController: self.searchViewController ];
+    
     
     // Override point for customization after application launch.
     [[navController navigationBar] setHidden:               true ];

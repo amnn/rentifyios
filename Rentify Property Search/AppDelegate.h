@@ -12,7 +12,12 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
+- (void)globalLock;
+- (void)globalUnlock;
+
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) PropertySearchViewController *searchViewController;
+
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 @end
