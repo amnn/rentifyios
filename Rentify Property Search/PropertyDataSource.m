@@ -12,7 +12,7 @@
 
 @interface PropertyDataSource ()
 
-- (void)asyncAccessOf:(NSString *)urlString ToCallback:( void (^)( id ) ) cb ensuring:( void (^)() ) ensure;
+- (void)asyncAccessOf:(NSString *)urlString toCallback:( void (^)( id ) ) cb ensuring:( void (^)() ) ensure;
 
 @end
 
@@ -22,18 +22,12 @@
     
     self = [super init];
     
-    if( self )
-    {
-        
-    }
-    
     return self;
 }
 
 - (void)asyncAccessOf:(NSString *)urlString toCallback:( void (^)( id ) ) cb ensuring:( void (^)() ) ensure {
     
-    NSURL *url           = [NSURL   URLWithString: urlString ];
-    NSURLRequest *req    = [NSURLRequest requestWithURL: url ];
+    NSURLRequest *req = [NSURLRequest           requestWithURL: [NSURL URLWithString: urlString ] ];
     
     [NSURLConnection sendAsynchronousRequest:                                                   req
                                        queue:                         [NSOperationQueue mainQueue ]
