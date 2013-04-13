@@ -6,7 +6,12 @@
 //  Copyright (c) 2013 Ashok Menon. All rights reserved.
 //
 
+#import "QuartzCore/CoreAnimation.h"
+
+#import "AppDelegate.h"
+
 #import "PropertySearchViewController.h"
+#import "PropertyDataSource.h"
 
 @interface PropertySearchViewController ()
 
@@ -29,15 +34,28 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    
+    if ( self ) {
+    
+        self.dataSource = [PropertyDataSource sharedInstance];
+        
     }
+    
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    [appDelegate globalLock];
+    
+    [self.dataSource indexToCallback: ^( NSArray *properties ) {
+        
+    } ensuring: ^(){ [appDelegate globalUnlock]; }];
+    
     // Do any additional setup after loading the view from its nib.
 }
 

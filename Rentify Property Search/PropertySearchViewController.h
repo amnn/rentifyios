@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 #import "PropertyTableViewController.h"
+#import "PropertyDataSource.h"
 
 @interface PropertySearchViewController : UIViewController
 <UISearchBarDelegate>
 
-@property (nonatomic,strong) IBOutlet PropertyTableViewController *propertyTableViewController;
+@property ( nonatomic,            strong ) IBOutlet PropertyTableViewController *propertyTableViewController;
+@property ( nonatomic, unsafe_unretained ) PropertyDataSource                                    *dataSource;
 
 @end
