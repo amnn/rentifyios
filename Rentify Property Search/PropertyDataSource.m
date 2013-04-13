@@ -8,6 +8,14 @@
 
 #import "PropertyDataSource.h"
 
+#define BASE_URL @"http://rentify-property-search.herokuapp.com"
+
+@interface PropertyDataSource ()
+
+- (void)asyncAccessOf:(NSString *)urlString ToCallback:( void (^)( id ) ) cb ensuring:( void (^)() ) ensure;
+
+@end
+
 @implementation PropertyDataSource
 
 - (id)init {
@@ -20,6 +28,54 @@
     }
     
     return self;
+}
+
+- (void)asyncAccessOf:(NSString *)urlString toCallback:( void (^)( id ) ) cb ensuring:( void (^)() ) ensure {
+    
+    NSURL *url           = [NSURL   URLWithString: urlString ];
+    NSURLRequest *req    = [NSURLRequest requestWithURL: url ];
+    
+    [NSURLConnection sendAsynchronousRequest:                                                   req
+                                       queue:                         [NSOperationQueue mainQueue ]
+                           completionHandler: ^( NSURLResponse *res, NSData *data, NSError *err ) {
+                               
+        if( data ) {
+                                   
+            NSError *jsonError;
+            id obj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+                                   
+            if( obj ) cb( obj );
+            else NSLog( @"Error parsing JSON: %@",             [jsonError localizedDescription ] );
+            
+        } else   NSLog( @"Error performing async request: %@", [err       localizedDescription ] );
+    
+        if( ensure ) ensure();
+    }];
+    
+}
+
+- (void)searchFor:(NSString *)query toCallback:( void (^)( NSArray * ) ) cb ensuring:( void (^)() ) ensure {
+    
+    [self asyncAccessOf: [BASE_URL stringByAppendingFormat:@"/search/%@.json", query ]
+             toCallback: cb
+               ensuring: ensure];
+    
+}
+
+- (void)indexToCallback:( void (^)( NSArray * ) ) cb ensuring:( void (^)() ) ensure {
+    
+    [self asyncAccessOf: [BASE_URL stringByAppendingString:@"/index.json" ]
+             toCallback: cb
+               ensuring: ensure ];
+    
+}
+
+- (void)property:(NSUInteger)pID toCallback:( void (^)( NSDictionary *) ) cb ensuring:( void (^)() ) ensure {
+    
+    [self asyncAccessOf: [BASE_URL stringByAppendingFormat:@"/property/%d.json", pID ]
+             toCallback: cb
+               ensuring: ensure ];
+    
 }
 
 + (id)sharedInstance {
