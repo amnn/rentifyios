@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 
 #import "PropertySearchViewController.h"
+#import "PropertyTableViewController.h"
 #import "PropertyDataSource.h"
 
 @interface PropertySearchViewController ()
@@ -27,6 +28,37 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     NSLog( @"Cancel Button Pressed" );
+}
+
+#pragma mark - Data Source Methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [self.tableData count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    // Configure the cell...
+    
+    NSDictionary *property = [self.tableData objectAtIndex:indexPath.row];
+
+    [[cell textLabel] setText:[property objectForKey:@"name"] ];
+    
+    return cell;
 }
 
 #pragma mark - View Lifecycle
@@ -53,6 +85,10 @@
     [appDelegate globalLock];
     
     [self.dataSource indexToCallback: ^( NSArray *properties ) {
+        
+        self.tableData = properties;
+        
+        [[self.propertyTableViewController tableView ] reloadData ];
         
     } ensuring: ^(){ [appDelegate globalUnlock]; }];
     

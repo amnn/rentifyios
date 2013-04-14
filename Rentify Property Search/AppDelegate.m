@@ -7,7 +7,6 @@
 //
 
 // TODO: PropertyCell
-// TODO: Set PropertySearchViewController as dataSource of PropertyTableViewController's TableView in relevant NIB.
 // TODO: Property Detail View (with own PropertyTableViewController for whom it is the data source.
 // TODO: Google Maps API Integration
 
