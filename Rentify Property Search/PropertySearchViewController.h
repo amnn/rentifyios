@@ -13,9 +13,15 @@
 
 @interface PropertySearchViewController : UIViewController
 <UISearchBarDelegate, UITableViewDataSource>
+{
+    bool    displayingIndex,
+         shouldBeginEditing;
+}
 
 @property ( nonatomic,            strong ) IBOutlet PropertyTableViewController *propertyTableViewController;
 @property ( nonatomic,            strong ) NSArray                                                *tableData;
 @property ( nonatomic, unsafe_unretained ) PropertyDataSource                                    *dataSource;
+
+- (void)updateWithIndex;
 
 @end

@@ -20,14 +20,71 @@
 
 @implementation PropertySearchViewController
 
+- (void)updateWithIndex {
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    [appDelegate globalLock];
+    
+    [self.dataSource indexToCallback: ^( NSArray *properties ) {
+        
+        self.tableData = properties;
+        
+        [[self.propertyTableViewController tableView ] reloadData ];
+        
+        displayingIndex = YES;
+        
+    } ensuring: ^(){ [appDelegate globalUnlock]; } ];
+    
+}
+
 #pragma mark - Delegate Methods
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog( @"Search Button Pressed" );
+    
+    if( [searchBar.text isEqualToString:@""] ) { [self updateWithIndex]; return; }
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate ];
+    
+    [searchBar   resignFirstResponder ];
+    [appDelegate           globalLock ];
+    
+    [self.dataSource searchFor:[searchBar text]
+                    toCallback:^( NSArray *properties ) {
+                    
+        self.tableData = properties;
+                        
+        [[self.propertyTableViewController tableView ] reloadData ];
+              
+        displayingIndex = NO;
+                        
+    } ensuring:^(){ [appDelegate globalUnlock]; } ];
+    
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    NSLog( @"Cancel Button Pressed" );
+    
+    if( !displayingIndex ) [self      updateWithIndex ];
+    [searchBar                   resignFirstResponder ];
+    
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    if( ![searchBar isFirstResponder ] )
+    {
+        [self updateWithIndex ];
+        shouldBeginEditing = NO;
+    }
+    
+}
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    
+    bool shouldBegin   = shouldBeginEditing;
+    shouldBeginEditing =                YES;
+    
+    return shouldBegin;
 }
 
 #pragma mark - Data Source Methods
@@ -69,8 +126,11 @@
     
     if ( self ) {
     
-        self.dataSource = [PropertyDataSource sharedInstance];
+        self.dataSource    = [PropertyDataSource sharedInstance];
         
+        displayingIndex    =  NO;
+        shouldBeginEditing = YES;
+          
     }
     
     return self;
@@ -78,19 +138,8 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    [appDelegate globalLock];
-    
-    [self.dataSource indexToCallback: ^( NSArray *properties ) {
-        
-        self.tableData = properties;
-        
-        [[self.propertyTableViewController tableView ] reloadData ];
-        
-    } ensuring: ^(){ [appDelegate globalUnlock]; }];
+    [super     viewDidLoad ];
+    [self  updateWithIndex ];
     
     // Do any additional setup after loading the view from its nib.
 }
