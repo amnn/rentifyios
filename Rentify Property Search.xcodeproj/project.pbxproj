@@ -16,6 +16,12 @@
 		F987886C17186C6300185A50 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F987886B17186C6300185A50 /* Default.png */; };
 		F987886E17186C6300185A50 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F987886D17186C6300185A50 /* Default@2x.png */; };
 		F987887017186C6300185A50 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F987886F17186C6300185A50 /* Default-568h@2x.png */; };
+		F987887D17186FE900185A50 /* PropertyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F987887B17186FE900185A50 /* PropertyTableViewController.m */; };
+		F987887E17186FE900185A50 /* PropertyTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F987887C17186FE900185A50 /* PropertyTableViewController.xib */; };
+		F987888717187E9800185A50 /* PropertySearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F987888517187E9800185A50 /* PropertySearchViewController.m */; };
+		F987888817187E9800185A50 /* PropertySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F987888617187E9800185A50 /* PropertySearchViewController.xib */; };
+		F987888C1718903A00185A50 /* PropertyDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F987888B1718903A00185A50 /* PropertyDataSource.m */; };
+		F987888F171989F300185A50 /* PropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F987888E171989F300185A50 /* PropertyCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +38,16 @@
 		F987886B17186C6300185A50 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		F987886D17186C6300185A50 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		F987886F17186C6300185A50 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F987887A17186FE900185A50 /* PropertyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyTableViewController.h; sourceTree = "<group>"; };
+		F987887B17186FE900185A50 /* PropertyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyTableViewController.m; sourceTree = "<group>"; };
+		F987887C17186FE900185A50 /* PropertyTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyTableViewController.xib; sourceTree = "<group>"; };
+		F987888417187E9800185A50 /* PropertySearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertySearchViewController.h; sourceTree = "<group>"; };
+		F987888517187E9800185A50 /* PropertySearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertySearchViewController.m; sourceTree = "<group>"; };
+		F987888617187E9800185A50 /* PropertySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertySearchViewController.xib; sourceTree = "<group>"; };
+		F987888A1718903A00185A50 /* PropertyDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDataSource.h; sourceTree = "<group>"; };
+		F987888B1718903A00185A50 /* PropertyDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyDataSource.m; sourceTree = "<group>"; };
+		F987888D171989F300185A50 /* PropertyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyCell.h; sourceTree = "<group>"; };
+		F987888E171989F300185A50 /* PropertyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +94,8 @@
 		F987885F17186C6300185A50 /* Rentify Property Search */ = {
 			isa = PBXGroup;
 			children = (
+				F98788891718901D00185A50 /* Model */,
+				F987887617186E4700185A50 /* View Controllers */,
 				F987886817186C6300185A50 /* AppDelegate.h */,
 				F987886917186C6300185A50 /* AppDelegate.m */,
 				F987886017186C6300185A50 /* Supporting Files */,
@@ -97,6 +115,30 @@
 				F987886F17186C6300185A50 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F987887617186E4700185A50 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F987887A17186FE900185A50 /* PropertyTableViewController.h */,
+				F987887B17186FE900185A50 /* PropertyTableViewController.m */,
+				F987887C17186FE900185A50 /* PropertyTableViewController.xib */,
+				F987888417187E9800185A50 /* PropertySearchViewController.h */,
+				F987888517187E9800185A50 /* PropertySearchViewController.m */,
+				F987888617187E9800185A50 /* PropertySearchViewController.xib */,
+				F987888D171989F300185A50 /* PropertyCell.h */,
+				F987888E171989F300185A50 /* PropertyCell.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		F98788891718901D00185A50 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F987888A1718903A00185A50 /* PropertyDataSource.h */,
+				F987888B1718903A00185A50 /* PropertyDataSource.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +196,8 @@
 				F987886C17186C6300185A50 /* Default.png in Resources */,
 				F987886E17186C6300185A50 /* Default@2x.png in Resources */,
 				F987887017186C6300185A50 /* Default-568h@2x.png in Resources */,
+				F987887E17186FE900185A50 /* PropertyTableViewController.xib in Resources */,
+				F987888817187E9800185A50 /* PropertySearchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +210,10 @@
 			files = (
 				F987886617186C6300185A50 /* main.m in Sources */,
 				F987886A17186C6300185A50 /* AppDelegate.m in Sources */,
+				F987887D17186FE900185A50 /* PropertyTableViewController.m in Sources */,
+				F987888717187E9800185A50 /* PropertySearchViewController.m in Sources */,
+				F987888C1718903A00185A50 /* PropertyDataSource.m in Sources */,
+				F987888F171989F300185A50 /* PropertyCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +295,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Rentify Property Search/Rentify Property Search-Prefix.pch";
 				INFOPLIST_FILE = "Rentify Property Search/Rentify Property Search-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -258,6 +307,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Rentify Property Search/Rentify Property Search-Prefix.pch";
 				INFOPLIST_FILE = "Rentify Property Search/Rentify Property Search-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
