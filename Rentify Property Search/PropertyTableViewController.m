@@ -8,6 +8,8 @@
 
 #import "PropertyTableViewController.h"
 
+#define CELL_HEIGHT 60.f
+
 @interface PropertyTableViewController ()
 
 @end
@@ -90,6 +92,11 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CELL_HEIGHT;
 }
 
 @end

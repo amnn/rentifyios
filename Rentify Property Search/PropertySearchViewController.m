@@ -13,6 +13,7 @@
 #import "PropertySearchViewController.h"
 #import "PropertyTableViewController.h"
 #import "PropertyDataSource.h"
+#import "PropertyCell.h"
 
 @interface PropertySearchViewController ()
 
@@ -104,16 +105,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PropertyCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[PropertyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
     
-    NSDictionary *property = [self.tableData objectAtIndex:indexPath.row];
-
-    [[cell textLabel] setText:[property objectForKey:@"name"] ];
+    NSDictionary *property = [self.tableData            objectAtIndex:indexPath.row ];
+    NSUInteger    bedrooms = [[property objectForKey:@"bedroom_count"] integerValue ];
+    
+    [[cell textLabel]         setText:                                                        [property objectForKey:@"name" ] ];
+    [[cell detailTextLabel]   setText: [NSString stringWithFormat:(bedrooms == 1 ? @"%d Bedroom" : @"%d Bedrooms"), bedrooms ] ];
+    [[cell subtitleTextLabel] setText: @"The Address, Goes In This, Text La, B3L" ];
     
     return cell;
 }
