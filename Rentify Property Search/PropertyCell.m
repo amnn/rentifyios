@@ -20,7 +20,7 @@
         
         [self.subtitleTextLabel setFont: [UIFont fontWithName:@"Helvetica" size:[UIFont systemFontSize ] ] ];
         [self.subtitleTextLabel setTextColor:                                         [UIColor grayColor ] ];
-        [self                   addSubview:                                         self.subtitleTextLabel ];
+        [self.contentView       addSubview:                                         self.subtitleTextLabel ];
         
     }
     return self;
@@ -29,8 +29,6 @@
 - (void)layoutSubviews {
     
     [super layoutSubviews];
-    
-    NSLog( @"%.2f %.2f %.2f %.2f", self.detailTextLabel.frame.origin.x, self.detailTextLabel.frame.origin.y, self.detailTextLabel.frame.size.width, self.detailTextLabel.frame.size.height );
     
     self.textLabel.frame       = CGRectMake(                   10.f, 10.f, 320.f, 20.f );
     self.detailTextLabel.frame = CGRectMake( self.detailTextLabel.frame.origin.x, 10.f,
