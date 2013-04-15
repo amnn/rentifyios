@@ -10,4 +10,6 @@
 
 @interface PropertyCell : UITableViewCell
 
+@property (nonatomic, strong) UILabel *subtitleTextLabel;
+
 @end

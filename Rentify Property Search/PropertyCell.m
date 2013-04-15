@@ -10,13 +10,32 @@
 
 @implementation PropertyCell
 
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        
+        self.subtitleTextLabel = [[UILabel alloc]     initWithFrame: CGRectMake( 10.f, 36.f, 310.f, 20.f ) ];
+        
+        [self.subtitleTextLabel setFont: [UIFont fontWithName:@"Helvetica" size:[UIFont systemFontSize ] ] ];
+        [self.subtitleTextLabel setTextColor:                                         [UIColor grayColor ] ];
+        [self                   addSubview:                                         self.subtitleTextLabel ];
+        
     }
     return self;
+}
+
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    NSLog( @"%.2f %.2f %.2f %.2f", self.detailTextLabel.frame.origin.x, self.detailTextLabel.frame.origin.y, self.detailTextLabel.frame.size.width, self.detailTextLabel.frame.size.height );
+    
+    self.textLabel.frame       = CGRectMake(                   10.f, 10.f, 320.f, 20.f );
+    self.detailTextLabel.frame = CGRectMake( self.detailTextLabel.frame.origin.x, 10.f,
+                                                 self.detailTextLabel.frame.size.width,
+                                                self.detailTextLabel.frame.size.height );
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
