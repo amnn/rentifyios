@@ -12,6 +12,8 @@
 
 - (id)init;
 
+- (void)addressFor:(NSUInteger) pID atLat:(float) lat andLong:(float) lng toCallback:( void (^)( NSString * ) ) cb;
+
 - (void)searchFor:(NSString *)query toCallback:( void (^)( NSArray      * ) ) cb ensuring:( void (^)() ) ensure;
 - (void)indexToCallback:                       ( void (^)( NSArray      * ) ) cb ensuring:( void (^)() ) ensure;
 - (void)property:(NSUInteger)pID    toCallback:( void (^)( NSDictionary * ) ) cb ensuring:( void (^)() ) ensure;

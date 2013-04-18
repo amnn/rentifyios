@@ -6,9 +6,7 @@
 //  Copyright (c) 2013 Ashok Menon. All rights reserved.
 //
 
-// TODO: PropertyCell
 // TODO: Property Detail View (with own PropertyTableViewController for whom it is the data source.
-// TODO: Google Maps API Integration
 
 #import "QuartzCore/CoreAnimation.h"
 

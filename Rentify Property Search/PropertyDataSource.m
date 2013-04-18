@@ -6,13 +6,24 @@
 //  Copyright (c) 2013 Ashok Menon. All rights reserved.
 //
 
+#import "CoreLocation/CoreLocation.h"
+#import "MapKit/MapKit.h"
+
 #import "PropertyDataSource.h"
+
+#import "GeocoderRequest.h"
 
 #define BASE_URL @"http://rentify-property-search.herokuapp.com"
 
 @interface PropertyDataSource ()
 
+@property (nonatomic, strong) NSMutableDictionary *addressCache;
+@property (nonatomic, strong) NSMutableArray      *requestQueue;
+
+@property (nonatomic, strong) CLGeocoder              *geocoder;
+
 - (void)asyncAccessOf:(NSString *)urlString toCallback:( void (^)( id ) ) cb ensuring:( void (^)() ) ensure;
+- (void)serveGeocoderRequests;
 
 @end
 
@@ -22,7 +33,57 @@
     
     self = [super init];
     
+    self.addressCache  = [[NSMutableDictionary alloc ] initWithCapacity: 1 ];
+    self.requestQueue  = [[NSMutableArray      alloc ] initWithCapacity: 1 ];
+    self.geocoder      = [[CLGeocoder          alloc ]                init ];
+    
     return self;
+}
+
+- (void)serveGeocoderRequests {
+    static bool serving = false;
+    
+    if( serving || [self.requestQueue count] == 0 ) return;
+    
+    serving = true;
+    
+    GeocoderRequest *req = [self.requestQueue       lastObject ];
+    [self.requestQueue                        removeLastObject ];
+    
+    [self.geocoder reverseGeocodeLocation: req.location
+                        completionHandler:
+     ^( NSArray *placemarks, NSError *error ){
+     
+         serving = false;
+         CLPlacemark *placemark = [placemarks objectAtIndex: 0 ];
+         NSString    *newAddr   = [[placemark.addressDictionary valueForKey: @"FormattedAddressLines" ] componentsJoinedByString: @", " ];
+         
+         [self.addressCache setObject:                            newAddr
+                               forKey: [NSNumber numberWithInt: req.pID ] ];
+         
+         req.callback(       newAddr );
+         [self serveGeocoderRequests ];
+         
+     } ];
+    
+}
+
+- (void)addressFor:(NSUInteger)pID atLat:(float) lat andLong:(float) lng toCallback:( void(^)( NSString * ) )cb {
+    
+    NSNumber *key     = [NSNumber          numberWithInt: pID ];
+    NSString *address = [self.addressCache objectForKey:  key ];
+    
+    if( address ) { cb( address ); return; }
+    
+    CLLocation *location = [[CLLocation alloc] initWithLatitude: lat longitude: lng ];
+    
+    [self.requestQueue insertObject:[[GeocoderRequest alloc ] initWithId:      pID
+                                                             andLocation: location
+                                                             andCallback:       cb ]
+                            atIndex: 0 ];
+    
+    [self serveGeocoderRequests ];
+    
 }
 
 - (void)asyncAccessOf:(NSString *)urlString toCallback:( void (^)( id ) ) cb ensuring:( void (^)() ) ensure {

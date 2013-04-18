@@ -117,7 +117,16 @@
     
     [[cell textLabel]         setText:                                                        [property objectForKey:@"name" ] ];
     [[cell detailTextLabel]   setText: [NSString stringWithFormat:(bedrooms == 1 ? @"%d Bedroom" : @"%d Bedrooms"), bedrooms ] ];
-    [[cell subtitleTextLabel] setText: @"The Address, Goes In This, Text La, B3L" ];
+    
+    [self.dataSource addressFor:[[property objectForKey:        @"id" ] integerValue ]
+                          atLat:[[property objectForKey:  @"latitude" ]   floatValue ]
+                        andLong:[[property objectForKey: @"longitude" ]   floatValue ]
+                     toCallback:
+     ^( NSString *address ) {
+     
+         [[cell subtitleTextLabel] setText: address ];
+         
+     } ];
     
     return cell;
 }

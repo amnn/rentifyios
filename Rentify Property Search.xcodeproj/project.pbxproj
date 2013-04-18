@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F9293D4F1720511E0012AD68 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9293D4E1720511E0012AD68 /* MapKit.framework */; };
+		F9293D511720512C0012AD68 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9293D501720512C0012AD68 /* CoreLocation.framework */; };
+		F9293D5417205CEE0012AD68 /* GeocoderRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F9293D5317205CEE0012AD68 /* GeocoderRequest.m */; };
 		F987885A17186C6300185A50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F987885917186C6300185A50 /* UIKit.framework */; };
 		F987885C17186C6300185A50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F987885B17186C6300185A50 /* Foundation.framework */; };
 		F987885E17186C6300185A50 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F987885D17186C6300185A50 /* CoreGraphics.framework */; };
@@ -25,6 +28,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F9293D4E1720511E0012AD68 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F9293D501720512C0012AD68 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F9293D5217205CEE0012AD68 /* GeocoderRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeocoderRequest.h; sourceTree = "<group>"; };
+		F9293D5317205CEE0012AD68 /* GeocoderRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeocoderRequest.m; sourceTree = "<group>"; };
 		F987885617186C6300185A50 /* Rentify Property Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rentify Property Search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F987885917186C6300185A50 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F987885B17186C6300185A50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -55,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9293D511720512C0012AD68 /* CoreLocation.framework in Frameworks */,
+				F9293D4F1720511E0012AD68 /* MapKit.framework in Frameworks */,
 				F987885A17186C6300185A50 /* UIKit.framework in Frameworks */,
 				F987885C17186C6300185A50 /* Foundation.framework in Frameworks */,
 				F987885E17186C6300185A50 /* CoreGraphics.framework in Frameworks */,
@@ -67,6 +76,8 @@
 		F987884D17186C6300185A50 = {
 			isa = PBXGroup;
 			children = (
+				F9293D501720512C0012AD68 /* CoreLocation.framework */,
+				F9293D4E1720511E0012AD68 /* MapKit.framework */,
 				F987885F17186C6300185A50 /* Rentify Property Search */,
 				F987885817186C6300185A50 /* Frameworks */,
 				F987885717186C6300185A50 /* Products */,
@@ -137,6 +148,8 @@
 			children = (
 				F987888A1718903A00185A50 /* PropertyDataSource.h */,
 				F987888B1718903A00185A50 /* PropertyDataSource.m */,
+				F9293D5217205CEE0012AD68 /* GeocoderRequest.h */,
+				F9293D5317205CEE0012AD68 /* GeocoderRequest.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -214,6 +227,7 @@
 				F987888717187E9800185A50 /* PropertySearchViewController.m in Sources */,
 				F987888C1718903A00185A50 /* PropertyDataSource.m in Sources */,
 				F987888F171989F300185A50 /* PropertyCell.m in Sources */,
+				F9293D5417205CEE0012AD68 /* GeocoderRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,7 +309,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Rentify Property Search/Rentify Property Search-Prefix.pch";
 				INFOPLIST_FILE = "Rentify Property Search/Rentify Property Search-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -307,7 +321,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Rentify Property Search/Rentify Property Search-Prefix.pch";
 				INFOPLIST_FILE = "Rentify Property Search/Rentify Property Search-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -332,6 +346,7 @@
 				F987887517186C6300185A50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
