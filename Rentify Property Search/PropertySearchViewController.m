@@ -23,7 +23,7 @@
 
 - (void)updateWithIndex {
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     [appDelegate globalLock];
     
@@ -45,7 +45,7 @@
     
     if( [searchBar.text isEqualToString:@""] ) { [self updateWithIndex]; return; }
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate ];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate ];
     
     [searchBar   resignFirstResponder ];
     [appDelegate           globalLock ];
@@ -112,8 +112,10 @@
     
     // Configure the cell...
     
-    NSDictionary *property = [self.tableData            objectAtIndex:indexPath.row ];
-    NSUInteger    bedrooms = [[property objectForKey:@"bedroom_count"] integerValue ];
+    NSDictionary *property = [self.tableData             objectAtIndex: indexPath.row ];
+    NSUInteger    bedrooms = [[property objectForKey: @"bedroom_count" ] integerValue ];
+    
+    cell.pID               = [[property objectForKey:            @"id" ] integerValue ];
     
     [[cell textLabel]         setText:                                                        [property objectForKey:@"name" ] ];
     [[cell detailTextLabel]   setText: [NSString stringWithFormat:(bedrooms == 1 ? @"%d Bedroom" : @"%d Bedrooms"), bedrooms ] ];

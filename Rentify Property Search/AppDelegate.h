@@ -10,14 +10,16 @@
 
 #import "PropertySearchViewController.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder
+< UIApplicationDelegate, UINavigationControllerDelegate >
 
 - (void)globalLock;
 - (void)globalUnlock;
 
-@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIWindow                                   *window;
 @property (strong, nonatomic) PropertySearchViewController *searchViewController;
+@property (strong, nonatomic) UINavigationController              *navController;
 
-@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) UIActivityIndicatorView         *activityIndicator;
 
 @end

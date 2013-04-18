@@ -10,6 +10,8 @@
 		F9293D4F1720511E0012AD68 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9293D4E1720511E0012AD68 /* MapKit.framework */; };
 		F9293D511720512C0012AD68 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9293D501720512C0012AD68 /* CoreLocation.framework */; };
 		F9293D5417205CEE0012AD68 /* GeocoderRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F9293D5317205CEE0012AD68 /* GeocoderRequest.m */; };
+		F9293D5817208BBC0012AD68 /* PropertyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9293D5617208BBB0012AD68 /* PropertyDetailViewController.m */; };
+		F9293D5917208BBC0012AD68 /* PropertyDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9293D5717208BBB0012AD68 /* PropertyDetailViewController.xib */; };
 		F987885A17186C6300185A50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F987885917186C6300185A50 /* UIKit.framework */; };
 		F987885C17186C6300185A50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F987885B17186C6300185A50 /* Foundation.framework */; };
 		F987885E17186C6300185A50 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F987885D17186C6300185A50 /* CoreGraphics.framework */; };
@@ -32,6 +34,9 @@
 		F9293D501720512C0012AD68 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F9293D5217205CEE0012AD68 /* GeocoderRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeocoderRequest.h; sourceTree = "<group>"; };
 		F9293D5317205CEE0012AD68 /* GeocoderRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeocoderRequest.m; sourceTree = "<group>"; };
+		F9293D5517208BBB0012AD68 /* PropertyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDetailViewController.h; sourceTree = "<group>"; };
+		F9293D5617208BBB0012AD68 /* PropertyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyDetailViewController.m; sourceTree = "<group>"; };
+		F9293D5717208BBB0012AD68 /* PropertyDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyDetailViewController.xib; sourceTree = "<group>"; };
 		F987885617186C6300185A50 /* Rentify Property Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rentify Property Search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F987885917186C6300185A50 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F987885B17186C6300185A50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -139,6 +144,9 @@
 				F987888617187E9800185A50 /* PropertySearchViewController.xib */,
 				F987888D171989F300185A50 /* PropertyCell.h */,
 				F987888E171989F300185A50 /* PropertyCell.m */,
+				F9293D5517208BBB0012AD68 /* PropertyDetailViewController.h */,
+				F9293D5617208BBB0012AD68 /* PropertyDetailViewController.m */,
+				F9293D5717208BBB0012AD68 /* PropertyDetailViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -211,6 +219,7 @@
 				F987887017186C6300185A50 /* Default-568h@2x.png in Resources */,
 				F987887E17186FE900185A50 /* PropertyTableViewController.xib in Resources */,
 				F987888817187E9800185A50 /* PropertySearchViewController.xib in Resources */,
+				F9293D5917208BBC0012AD68 /* PropertyDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +237,7 @@
 				F987888C1718903A00185A50 /* PropertyDataSource.m in Sources */,
 				F987888F171989F300185A50 /* PropertyCell.m in Sources */,
 				F9293D5417205CEE0012AD68 /* GeocoderRequest.m in Sources */,
+				F9293D5817208BBC0012AD68 /* PropertyDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +321,7 @@
 				INFOPLIST_FILE = "Rentify Property Search/Rentify Property Search-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -323,6 +334,7 @@
 				INFOPLIST_FILE = "Rentify Property Search/Rentify Property Search-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

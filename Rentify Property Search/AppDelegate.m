@@ -17,6 +17,8 @@
 
 @implementation AppDelegate
 
+#pragma mark - ActivityIndicator Methods
+
 - (void)globalLock {
     if(  self.activityIndicator ) return;
     
@@ -42,21 +44,32 @@
     self.activityIndicator = nil;
 }
 
+#pragma mark - UINavigationController Delegate Methods
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    
+    [[self.navController navigationBar] setHidden: viewController == self.searchViewController ];
+    
+}
+
+#pragma mark - Application Lifecycle
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window               = [[UIWindow alloc]                       initWithFrame:  [[UIScreen mainScreen] bounds] ];
     self.searchViewController = [[PropertySearchViewController alloc] initWithNibName: @"PropertySearchViewController"
                                                                                bundle:           [NSBundle mainBundle] ];
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController: self.searchViewController ];
+    self.navController = [[UINavigationController alloc]   initWithRootViewController:       self.searchViewController ];
     
     
     // Override point for customization after application launch.
-    [[navController navigationBar] setHidden:               true ];
-    [self.window                  addSubview: navController.view ];
+    [self.navController   setDelegate:                    self ];
+    [self.window          addSubview:  self.navController.view ];
     
-    self.window.backgroundColor    = [UIColor whiteColor];
-    self.window.rootViewController =        navController;
+    self.window.backgroundColor    =  [UIColor whiteColor ];
+    self.window.rootViewController =     self.navController;
     
     [self.window makeKeyAndVisible];
     return YES;

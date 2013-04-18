@@ -10,6 +10,7 @@
 
 @interface PropertyCell : UITableViewCell
 
-@property (nonatomic, strong) UILabel *subtitleTextLabel;
+@property (nonatomic, assign) NSUInteger                pID;
+@property (nonatomic, strong) UILabel    *subtitleTextLabel;
 
 @end

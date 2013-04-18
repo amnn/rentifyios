@@ -8,6 +8,10 @@
 
 #import "PropertyTableViewController.h"
 
+#import "AppDelegate.h"
+#import "PropertyDetailViewController.h"
+#import "PropertyCell.h"
+
 #define CELL_HEIGHT 60.f
 
 @interface PropertyTableViewController ()
@@ -92,6 +96,13 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    PropertyCell *selected    = ( PropertyCell * )[tableView  cellForRowAtIndexPath: indexPath ];
+    AppDelegate  *appDelegate = ( AppDelegate  * )[[UIApplication sharedApplication ] delegate ];
+    
+    PropertyDetailViewController *detailViewController = [[PropertyDetailViewController alloc] initWithPropertyID: selected.pID ];
+    
+    [detailViewController                setTitle:      [[selected textLabel ] text ] ];
+    [appDelegate.navController pushViewController: detailViewController animated: YES ];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
