@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Ashok Menon. All rights reserved.
 //
 
-// TODO: Property Detail View (with own PropertyTableViewController for whom it is the data source.
+// TODO: Use Property Model from DataSource onwards.
 
 #import "QuartzCore/CoreAnimation.h"
 

@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 #import "PropertyDataSource.h"
 #import "PropertyTableViewController.h"
@@ -20,9 +22,10 @@
 
 @property (nonatomic, strong) IBOutlet PropertyTableViewController *propertyTableViewController;
 
-@property (nonatomic, strong) IBOutlet UILabel     *nameLabel;
-@property (nonatomic, strong) IBOutlet UILabel  *addressLabel;
-@property (nonatomic, strong) IBOutlet UILabel *bedroomsLabel;
+@property (nonatomic, strong) IBOutlet MKMapView        *mapView;
+@property (nonatomic, strong) IBOutlet UILabel        *nameLabel;
+@property (nonatomic, strong) IBOutlet UILabel     *addressLabel;
+@property (nonatomic, strong) IBOutlet UILabel    *bedroomsLabel;
 
 - (id)initWithPropertyID:(NSUInteger)pID;
 

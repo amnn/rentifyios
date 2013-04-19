@@ -6,11 +6,15 @@
 //  Copyright (c) 2013 Ashok Menon. All rights reserved.
 //
 
+#import "MapKit/MapKit.h"
+#import "CoreLocation/CoreLocation.h"
+
 #import "PropertyDetailViewController.h"
 
 #import "AppDelegate.h"
 #import "PropertyDataSource.h"
 #import "PropertyCell.h"
+#import "Property.h"
 
 @interface PropertyDetailViewController ()
 
@@ -57,6 +61,16 @@
      ^( NSString *address ) {
          
          [[cell subtitleTextLabel] setText: address ];
+         
+         CLLocationCoordinate2D loc = CLLocationCoordinate2DMake( [[property objectForKey:  @"latitude" ] floatValue ],
+                                                                  [[property objectForKey: @"longitude" ] floatValue ] );
+         
+         Property *prop  =         [[Property alloc ] init ];
+         prop.coordinate =                               loc;
+         prop.name       = [property objectForKey: @"name" ];
+         prop.address    =                           address;
+         
+         [self.mapView addAnnotation: prop ];
          
      } ];
     
@@ -108,6 +122,12 @@
          [self.bedroomsLabel setText: [NSString stringWithFormat: ( bedrooms == 1 ? @"%d Bedroom" : @"%d Bedrooms" ), bedrooms ] ];
          [self.nameLabel     setText:                                                     [self.property objectForKey: @"name" ] ];
          
+         CLLocationCoordinate2D center = CLLocationCoordinate2DMake( [[self.property objectForKey:  @"latitude" ] floatValue ],
+                                                                     [[self.property objectForKey: @"longitude" ] floatValue ] );
+         
+         MKCoordinateRegion     region = MKCoordinateRegionMakeWithDistance(                          center, 20000.f, 20000.f );
+         
+         [self.mapView setRegion: region animated: YES ];
          
          [self.dataSource addressFor:[[self.property objectForKey:        @"id" ] integerValue]
                                atLat:[[self.property objectForKey:  @"latitude" ]   floatValue]
@@ -116,6 +136,13 @@
           ^( NSString *address ){
           
               [self.addressLabel setText: address ];
+              Property *property = [[Property alloc] init];
+              
+              property.name       = [self.property objectForKey: @"name" ];
+              property.address    =                                address;
+              property.coordinate =                                 center;
+              
+              [self.mapView addAnnotation: property ];
               
           } ];
          
