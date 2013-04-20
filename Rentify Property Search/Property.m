@@ -16,4 +16,27 @@
 - (NSString *)title    { return    self.name; }
 - (NSString *)subtitle { return self.address; }
 
++ (Property *)fromJSONObject:(NSDictionary *)json
+{
+    Property *prop = [[Property alloc ] init ];
+    
+    prop.pID        =                             [[json objectForKey:            @"id" ] integerValue ];
+    prop.coordinate = CLLocationCoordinate2DMake( [[json objectForKey:      @"latitude" ]   floatValue ],
+                                                  [[json objectForKey:     @"longitude" ]   floatValue ] );
+    prop.bedrooms   =                             [[json objectForKey: @"bedroom_count" ] integerValue ];
+    prop.name       =                             [json  objectForKey:          @"name" ];
+    
+    return prop;
+}
+
++ (NSArray  *)fromJSONObjects:(NSArray *)json
+{
+    
+    NSMutableArray *properties = [[NSMutableArray alloc ] initWithCapacity: 1 ];
+    
+    for ( NSDictionary *obj in json ) [properties addObject: [Property fromJSONObject: obj ] ];
+    
+    return properties;
+}
+
 @end

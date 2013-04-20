@@ -14,11 +14,16 @@
 @interface Property : NSObject
 <MKAnnotation>
 
+@property (nonatomic, assign) NSUInteger                    pID;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic, assign) NSUInteger               bedrooms;
 @property (nonatomic,   copy) NSString                    *name;
 @property (nonatomic,   copy) NSString                 *address;
 
 - (NSString *)title;
 - (NSString *)subtitle;
+
++ (Property *)fromJSONObject:(NSDictionary *)json;
++ (NSArray  *)fromJSONObjects:(NSArray *)json;
 
 @end
