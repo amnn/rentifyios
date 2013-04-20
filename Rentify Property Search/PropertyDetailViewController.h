@@ -17,7 +17,7 @@
 
 @property (nonatomic, assign) NSUInteger                 pID;
 @property (nonatomic, strong) PropertyDataSource *dataSource;
-@property (nonatomic, strong) NSDictionary         *property;
+@property (nonatomic, strong) Property             *property;
 @property (nonatomic, strong) NSArray               *similar;
 
 @property (nonatomic, strong) IBOutlet PropertyTableViewController *propertyTableViewController;

@@ -12,6 +12,9 @@
 #import "PropertyDataSource.h"
 
 #import "GeocoderRequest.h"
+#import "ParseJSONObjects.h"
+#import "Property.h"
+#import "PropertyDetail.h"
 
 #define BASE_URL @"http://rentify-property-search.herokuapp.com"
 
@@ -22,7 +25,7 @@
 
 @property (nonatomic, strong) CLGeocoder              *geocoder;
 
-- (void)asyncAccessOf:(NSString *)urlString toCallback:( void (^)( id ) ) cb ensuring:( void (^)() ) ensure;
+- (void)asyncAccessOf: (Class<ParseJSONObjects>) objType at:(NSString *)urlString toCallback:( void (^)( id ) ) cb ensuring:( void (^)() ) ensure;
 - (void)serveGeocoderRequests;
 
 @end
@@ -86,7 +89,7 @@
     
 }
 
-- (void)asyncAccessOf:(NSString *)urlString toCallback:( void (^)( id ) ) cb ensuring:( void (^)() ) ensure {
+- (void)asyncAccessOf: (Class<ParseJSONObjects>)objType at:(NSString *)urlString toCallback:( void (^)( id ) ) cb ensuring:( void (^)() ) ensure {
     
     NSURLRequest *req = [NSURLRequest           requestWithURL: [NSURL URLWithString: urlString ] ];
     
@@ -99,7 +102,7 @@
             NSError *jsonError;
             id obj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
                                    
-            if( obj ) cb( obj );
+            if( obj ) cb( [objType fromJSONObjects:obj] );
             else NSLog( @"Error parsing JSON: %@",             [jsonError localizedDescription ] );
             
         } else   NSLog( @"Error performing async request: %@", [err       localizedDescription ] );
@@ -111,7 +114,8 @@
 
 - (void)searchFor:(NSString *)query toCallback:( void (^)( NSArray * ) ) cb ensuring:( void (^)() ) ensure {
     
-    [self asyncAccessOf: [BASE_URL stringByAppendingFormat:@"/search/%@.json", query ]
+    [self asyncAccessOf: [Property class]
+                     at: [BASE_URL stringByAppendingFormat:@"/search/%@.json", query ]
              toCallback: cb
                ensuring: ensure];
     
@@ -119,15 +123,17 @@
 
 - (void)indexToCallback:( void (^)( NSArray * ) ) cb ensuring:( void (^)() ) ensure {
     
-    [self asyncAccessOf: [BASE_URL stringByAppendingString:@"/index.json" ]
+    [self asyncAccessOf: [Property class]
+                     at: [BASE_URL stringByAppendingString:@"/index.json" ]
              toCallback: cb
                ensuring: ensure ];
     
 }
 
-- (void)property:(NSUInteger)pID toCallback:( void (^)( NSDictionary *) ) cb ensuring:( void (^)() ) ensure {
+- (void)property:(NSUInteger)pID toCallback:( void (^)( PropertyDetail *) ) cb ensuring:( void (^)() ) ensure {
     
-    [self asyncAccessOf: [BASE_URL stringByAppendingFormat:@"/property/%d.json", pID ]
+    [self asyncAccessOf: [PropertyDetail class]
+                     at: [BASE_URL stringByAppendingFormat:@"/property/%d.json", pID ]
              toCallback: cb
                ensuring: ensure ];
     

@@ -10,9 +10,10 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+#import "ParseJSONObjects.h"
 
 @interface Property : NSObject
-<MKAnnotation>
+<MKAnnotation, ParseJSONObjects>
 
 @property (nonatomic, assign) NSUInteger                    pID;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
@@ -24,6 +25,5 @@
 - (NSString *)subtitle;
 
 + (Property *)fromJSONObject:(NSDictionary *)json;
-+ (NSArray  *)fromJSONObjects:(NSArray *)json;
 
 @end

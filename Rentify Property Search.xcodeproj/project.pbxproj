@@ -13,6 +13,7 @@
 		F9293D5817208BBC0012AD68 /* PropertyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9293D5617208BBB0012AD68 /* PropertyDetailViewController.m */; };
 		F9293D5917208BBC0012AD68 /* PropertyDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9293D5717208BBB0012AD68 /* PropertyDetailViewController.xib */; };
 		F9293D5C1721F8DC0012AD68 /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = F9293D5B1721F8DC0012AD68 /* Property.m */; };
+		F9293D621722B3BA0012AD68 /* PropertyDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = F9293D611722B3BA0012AD68 /* PropertyDetail.m */; };
 		F987885A17186C6300185A50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F987885917186C6300185A50 /* UIKit.framework */; };
 		F987885C17186C6300185A50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F987885B17186C6300185A50 /* Foundation.framework */; };
 		F987885E17186C6300185A50 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F987885D17186C6300185A50 /* CoreGraphics.framework */; };
@@ -40,6 +41,9 @@
 		F9293D5717208BBB0012AD68 /* PropertyDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyDetailViewController.xib; sourceTree = "<group>"; };
 		F9293D5A1721F8DC0012AD68 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Property.h; sourceTree = "<group>"; };
 		F9293D5B1721F8DC0012AD68 /* Property.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Property.m; sourceTree = "<group>"; };
+		F9293D5D1722B1320012AD68 /* ParseJSONObjects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParseJSONObjects.h; sourceTree = "<group>"; };
+		F9293D601722B3B90012AD68 /* PropertyDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDetail.h; sourceTree = "<group>"; };
+		F9293D611722B3BA0012AD68 /* PropertyDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyDetail.m; sourceTree = "<group>"; };
 		F987885617186C6300185A50 /* Rentify Property Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rentify Property Search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F987885917186C6300185A50 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F987885B17186C6300185A50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -81,6 +85,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F9293D5E1722B1740012AD68 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				F9293D5D1722B1320012AD68 /* ParseJSONObjects.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		F9293D5F1722B1870012AD68 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F987888D171989F300185A50 /* PropertyCell.h */,
+				F987888E171989F300185A50 /* PropertyCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		F987884D17186C6300185A50 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +134,8 @@
 		F987885F17186C6300185A50 /* Rentify Property Search */ = {
 			isa = PBXGroup;
 			children = (
+				F9293D5F1722B1870012AD68 /* View */,
+				F9293D5E1722B1740012AD68 /* Protocols */,
 				F98788891718901D00185A50 /* Model */,
 				F987887617186E4700185A50 /* View Controllers */,
 				F987886817186C6300185A50 /* AppDelegate.h */,
@@ -145,8 +168,6 @@
 				F987888417187E9800185A50 /* PropertySearchViewController.h */,
 				F987888517187E9800185A50 /* PropertySearchViewController.m */,
 				F987888617187E9800185A50 /* PropertySearchViewController.xib */,
-				F987888D171989F300185A50 /* PropertyCell.h */,
-				F987888E171989F300185A50 /* PropertyCell.m */,
 				F9293D5517208BBB0012AD68 /* PropertyDetailViewController.h */,
 				F9293D5617208BBB0012AD68 /* PropertyDetailViewController.m */,
 				F9293D5717208BBB0012AD68 /* PropertyDetailViewController.xib */,
@@ -163,6 +184,8 @@
 				F9293D5317205CEE0012AD68 /* GeocoderRequest.m */,
 				F9293D5A1721F8DC0012AD68 /* Property.h */,
 				F9293D5B1721F8DC0012AD68 /* Property.m */,
+				F9293D601722B3B90012AD68 /* PropertyDetail.h */,
+				F9293D611722B3BA0012AD68 /* PropertyDetail.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -244,6 +267,7 @@
 				F9293D5417205CEE0012AD68 /* GeocoderRequest.m in Sources */,
 				F9293D5817208BBC0012AD68 /* PropertyDetailViewController.m in Sources */,
 				F9293D5C1721F8DC0012AD68 /* Property.m in Sources */,
+				F9293D621722B3BA0012AD68 /* PropertyDetail.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

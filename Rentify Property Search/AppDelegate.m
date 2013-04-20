@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Ashok Menon. All rights reserved.
 //
 
-// TODO: Use Property Model from DataSource onwards.
-
 #import "QuartzCore/CoreAnimation.h"
 
 #import "AppDelegate.h"

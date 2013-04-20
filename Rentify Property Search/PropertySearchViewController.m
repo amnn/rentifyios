@@ -14,6 +14,8 @@
 #import "PropertyTableViewController.h"
 #import "PropertyDataSource.h"
 #import "PropertyCell.h"
+#import "Property.h"
+#import "PropertyDetail.h"
 
 @interface PropertySearchViewController ()
 
@@ -112,17 +114,15 @@
     
     // Configure the cell...
     
-    NSDictionary *property = [self.tableData             objectAtIndex: indexPath.row ];
-    NSUInteger    bedrooms = [[property objectForKey: @"bedroom_count" ] integerValue ];
+    Property *property = [self.tableData objectAtIndex: indexPath.row ];
+    cell.pID           =                                   property.pID;
     
-    cell.pID               = [[property objectForKey:            @"id" ] integerValue ];
+    [[cell textLabel]         setText:                                                        property.name ];
+    [[cell detailTextLabel]   setText: [NSString stringWithFormat:(property.bedrooms == 1 ? @"%d Bedroom" : @"%d Bedrooms"), property.bedrooms ] ];
     
-    [[cell textLabel]         setText:                                                        [property objectForKey:@"name" ] ];
-    [[cell detailTextLabel]   setText: [NSString stringWithFormat:(bedrooms == 1 ? @"%d Bedroom" : @"%d Bedrooms"), bedrooms ] ];
-    
-    [self.dataSource addressFor:[[property objectForKey:        @"id" ] integerValue ]
-                          atLat:[[property objectForKey:  @"latitude" ]   floatValue ]
-                        andLong:[[property objectForKey: @"longitude" ]   floatValue ]
+    [self.dataSource addressFor: property.pID
+                          atLat: property.coordinate.latitude
+                        andLong: property.coordinate.longitude
                      toCallback:
      ^( NSString *address ) {
      

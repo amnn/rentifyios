@@ -15,6 +15,7 @@
 #import "PropertyDataSource.h"
 #import "PropertyCell.h"
 #import "Property.h"
+#import "PropertyDetail.h"
 
 @interface PropertyDetailViewController ()
 
@@ -46,31 +47,21 @@
     
     // Configure the cell...
     
-    NSDictionary *property = [self.similar               objectAtIndex: indexPath.row ];
-    NSUInteger    bedrooms = [[property objectForKey: @"bedroom_count" ] integerValue ];
+    Property *property = [self.similar objectAtIndex: indexPath.row ];
+    cell.pID           =                                 property.pID;
     
-    cell.pID               = [[property objectForKey:            @"id" ] integerValue ];
+    [[cell textLabel]         setText:                                                                                             property.name ];
+    [[cell detailTextLabel]   setText: [NSString stringWithFormat:(property.bedrooms == 1 ? @"%d Bedroom" : @"%d Bedrooms"), property.bedrooms ] ];
     
-    [[cell textLabel]         setText:                                                        [property objectForKey:@"name" ] ];
-    [[cell detailTextLabel]   setText: [NSString stringWithFormat:(bedrooms == 1 ? @"%d Bedroom" : @"%d Bedrooms"), bedrooms ] ];
-    
-    [self.dataSource addressFor:[[property objectForKey:        @"id" ] integerValue ]
-                          atLat:[[property objectForKey:  @"latitude" ]   floatValue ]
-                        andLong:[[property objectForKey: @"longitude" ]   floatValue ]
+    [self.dataSource addressFor:                  property.pID
+                          atLat:  property.coordinate.latitude
+                        andLong: property.coordinate.longitude
                      toCallback:
      ^( NSString *address ) {
          
          [[cell subtitleTextLabel] setText: address ];
-         
-         CLLocationCoordinate2D loc = CLLocationCoordinate2DMake( [[property objectForKey:  @"latitude" ] floatValue ],
-                                                                  [[property objectForKey: @"longitude" ] floatValue ] );
-         
-         Property *prop  =         [[Property alloc ] init ];
-         prop.coordinate =                               loc;
-         prop.name       = [property objectForKey: @"name" ];
-         prop.address    =                           address;
-         
-         [self.mapView addAnnotation: prop ];
+         property.address =                   address;
+         [self.mapView      addAnnotation: property ];
          
      } ];
     
@@ -112,41 +103,32 @@
     
     [self.dataSource property: self.pID
                    toCallback:
-     ^( NSDictionary *data ) {
+     ^( PropertyDetail *data ) {
      
-         self.property = [data objectForKey: @"property" ];
-         self.similar  = [data objectForKey:  @"similar" ];
-         
-         NSUInteger bedrooms = [[self.property objectForKey: @"bedroom_count" ] integerValue ];
+         self.property       =          data.property;
+         self.similar        =           data.similar;
+         NSUInteger bedrooms = self.property.bedrooms;
          
          [self.bedroomsLabel setText: [NSString stringWithFormat: ( bedrooms == 1 ? @"%d Bedroom" : @"%d Bedrooms" ), bedrooms ] ];
-         [self.nameLabel     setText:                                                     [self.property objectForKey: @"name" ] ];
+         [self.nameLabel     setText:                                                                         self.property.name ];
          
-         CLLocationCoordinate2D center = CLLocationCoordinate2DMake( [[self.property objectForKey:  @"latitude" ] floatValue ],
-                                                                     [[self.property objectForKey: @"longitude" ] floatValue ] );
-         
-         MKCoordinateRegion     region = MKCoordinateRegionMakeWithDistance(                          center, 20000.f, 20000.f );
+         MKCoordinateRegion     region = MKCoordinateRegionMakeWithDistance(          self.property.coordinate, 20000.f, 20000.f );
          
          [self.mapView setRegion: region animated: YES ];
          
-         [self.dataSource addressFor:[[self.property objectForKey:        @"id" ] integerValue]
-                               atLat:[[self.property objectForKey:  @"latitude" ]   floatValue]
-                             andLong:[[self.property objectForKey: @"longitude" ]   floatValue]
+         [self.dataSource addressFor:                  self.property.pID
+                               atLat:  self.property.coordinate.latitude
+                             andLong: self.property.coordinate.longitude
                           toCallback:
           ^( NSString *address ){
           
-              [self.addressLabel setText: address ];
-              Property *property = [[Property alloc] init];
-              
-              property.name       = [self.property objectForKey: @"name" ];
-              property.address    =                                address;
-              property.coordinate =                                 center;
-              
-              [self.mapView addAnnotation: property ];
+              [self.addressLabel setText:             address ];
+              self.property.address =                 address;
+              [self.mapView      addAnnotation: self.property ];
               
           } ];
          
-         [[self.propertyTableViewController tableView ]       reloadData ];
+         [[self.propertyTableViewController tableView ] reloadData ];
          
          
          
